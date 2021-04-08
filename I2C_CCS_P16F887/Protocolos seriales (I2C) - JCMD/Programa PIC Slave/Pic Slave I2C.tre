@@ -1,0 +1,6 @@
+ÀÄPic Slave I2C
+   ÃÄMAIN  0/97  Ram=1
+   ³  ÃÄ@cinit1  (Inline)  Ram=0
+   ³  ÀÄ@delay_ms1  0/23  Ram=1
+   ÀÄSSP_isr  0/89  Ram=2
+      ÀÄ@I2C_WRITE_1  (Inline)  Ram=1

@@ -1,0 +1,87 @@
+#include <16F887.h>
+
+#device ADC=10
+
+#FUSES NOWDT      //No Watch Dog Timer
+#FUSES BROWNOUT //No brownout reset
+#FUSES NOLVP      //No low voltage prgming, B3(PIC16) or B5(PIC18) used for I/O
+#FUSES PUT
+
+#use delay(internal=4000000)
+
+#use FIXED_IO( B_outputs=PIN_B5,PIN_B4,PIN_B3 )
+#define Potenciometro   PIN_A0
+#define Boton1   PIN_B0
+#define Boton2   PIN_B1
+#define Boton3   PIN_B2
+#define Led1   PIN_B3
+#define Led2   PIN_B5
+
+#use standard_io(c)
+#use i2c(SLAVE, SDA=PIN_C4, SCL=PIN_C3, address=0xA0)
+
+
+int8 buffer[8] = {0x01,0x23,0x45,0x67,0x89,0xAB,0xCD,0xEF};
+int8 index;
+int8 incoming;
+unsigned int16 a1;
+
+
+#INT_SSP
+void ssp_interrupt()
+{
+int8 state;
+         output_high(Led1);
+state = i2c_isr_state();
+   
+if(state < 0x80)     // Master is sending data 7f
+  {
+   incoming = i2c_read();  
+  }
+
+   if((state >= 0x80)&&(state <= 0x87))   // Master is requesting data from slave
+  {
+   index = state & 7;  // Lower 3 bits of state = the index
+   i2c_write(buffer[index]);
+  }
+
+}
+
+void main() {
+
+   enable_interrupts(INT_SSP);
+   enable_interrupts(GLOBAL);
+   i2c_start();
+  setup_oscillator(OSC_4MHZ);
+  setup_adc(ADC_CLOCK_DIV_8);      // Set ADC conversion time to 8Tosc
+  setup_adc_ports(PIN_A0);             // Configure RA0 (AN0) as analog
+  set_adc_channel(0);               // Select channel 0 input
+  
+  delay_ms(100);                    // Wait 100ms
+  output_low(Led1);
+  output_low(Led2);
+   
+   while (TRUE) {
+   
+      if(input_state(PIN_B0) == 1){buffer[0]=49;}else{buffer[0]=48;}
+      if(input_state(PIN_B1) == 1){buffer[1]=49;}else{buffer[1]=48;}
+      if(input_state(PIN_B2) == 1){buffer[2]=49;}else{buffer[2]=48;}
+      
+      a1 = read_adc();
+   
+         output_high(Led2);
+         delay_ms(500); 
+         output_low(Led2);
+         delay_ms(500); 
+         
+      // Recepción por comunicación I2C
+   //   if(i2c_poll()) {
+   //      incoming=i2c_read();
+         if (incoming==65){output_high(Led1);}
+         if (incoming==97){output_low(Led1);}
+         if (incoming==66){output_high(Led2);}
+         if (incoming==98){output_low(Led2);}
+
+        // }
+   }
+}

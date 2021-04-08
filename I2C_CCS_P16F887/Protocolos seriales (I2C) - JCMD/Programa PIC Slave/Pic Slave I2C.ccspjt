@@ -1,0 +1,205 @@
+[PROJECT]
+Target=Pic Slave I2C.hex
+Processor_Text=PIC16F887
+CCSVerions=5.025
+Compiler=PCM
+CCSVersion=5.025
+Development_Mode=
+ToolSuite=CCS
+[Target Data]
+FileList=Pic Slave I2C.c
+BuildTool=C-COMPILER
+OptionString=+FM
+AdditionalOptionString=
+BuildRequired=1
+[Directories]
+Include=<default>
+Library=
+LinkerScript=
+output=
+[C:\Users\JCesarMD\Documents\CCS C Projects\I2CuC887\I2CuC887]
+Type=4
+[mru-list]
+1=Pic Slave I2C.c
+
+[ProjectLog]
+Days=4
+D1=26-03-2021
+D1_L=9
+D1_L1=[83078]Project Opened.
+D1_L2=[83088]Started Editing.
+D1_L3=[83749]Stopped Editing.
+D1_L4=[84104]Started Editing.
+D1_L5=[84757]Stopped Editing.
+D1_L6=[84846]Started Editing.
+D1_L7=[85146]Stopped Editing.
+D1_L8=[85469]Started Editing.
+D1_L9=[86366]Stopped Editing.
+D2=27-03-2021
+D2_L=61
+D2_L1=[14]Started Editing.
+D2_L2=[314]Stopped Editing.
+D2_L3=[497]Started Editing.
+D2_L4=[2324]Stopped Editing.
+D2_L5=[2711]Started Editing.
+D2_L6=[3217]Stopped Editing.
+D2_L7=[3550]Started Editing.
+D2_L8=[4930]Stopped Editing.
+D2_L9=[4969]Started Editing.
+D2_L10=[5467]Stopped Editing.
+TotalEdit=203
+TotalDebug=0
+D2_E=157
+D2_D=0
+D2_L11=[5467]Project Closed.
+D2_L12=[46969]Project Opened.
+D2_L13=[47035]Started Editing.
+D2_L14=[47336]Stopped Editing.
+D2_L15=[47683]Started Editing.
+D2_L16=[48450]Stopped Editing.
+D2_L17=[48582]Started Editing.
+D2_L18=[48883]Stopped Editing.
+D2_L19=[50607]Started Editing.
+D2_L20=[51215]Stopped Editing.
+D2_L21=[51557]Started Editing.
+D2_L22=[51957]Stopped Editing.
+D2_L23=[51963]Started Editing.
+D2_L24=[53124]Stopped Editing.
+D2_L25=[56021]Started Editing.
+D2_L26=[56351]Stopped Editing.
+D2_L27=[57040]Started Editing.
+D2_L28=[57362]Stopped Editing.
+D2_L29=[64006]Started Editing.
+D2_L30=[64490]Stopped Editing.
+D2_L31=[65521]Started Editing.
+D2_L32=[66109]Stopped Editing.
+D2_L33=[66317]Started Editing.
+D2_L34=[66795]Stopped Editing.
+D2_L35=[66835]Started Editing.
+D2_L36=[67137]Stopped Editing.
+D2_L37=[68204]Started Editing.
+D2_L38=[68784]Stopped Editing.
+D2_L39=[69210]Started Editing.
+D2_L40=[69510]Stopped Editing.
+D2_L41=[70100]Started Editing.
+D2_L42=[70199]Stopped Editing.
+D2_L43=[70199]Project Closed.
+D2_L44=[71018]Project Opened.
+D2_L45=[71033]Project Closed.
+D2_L46=[72181]Project Opened.
+D2_L47=[72190]Started Editing.
+D2_L48=[73510]Stopped Editing.
+D2_L49=[79146]Project Closed.
+D2_L50=[80011]Project Opened.
+D2_L51=[80023]Started Editing.
+D2_L52=[80830]Stopped Editing.
+D2_L53=[80887]Project Closed.
+D2_L54=[81634]Project Opened.
+D2_L55=[81661]Started Editing.
+D2_L56=[81908]Stopped Editing.
+D2_L57=[81908]Project Closed.
+D2_L58=[81971]Project Opened.
+D2_L59=[82089]Project Closed.
+D2_L60=[82423]Project Opened.
+D2_L61=[82975]Project Closed.
+D3=28-03-2021
+D3_L=23
+D3_L1=[61551]Project Opened.
+D3_L2=[63325]Started Editing.
+D3_L3=[63549]Stopped Editing.
+D3_E=15
+D3_D=0
+D3_L4=[63549]Project Closed.
+D3_L5=[64222]Project Opened.
+D3_L6=[64227]Started Editing.
+D3_L7=[64758]Stopped Editing.
+D3_L8=[64758]Project Closed.
+D3_L9=[66087]Project Opened.
+D3_L10=[70188]Started Editing.
+D3_L11=[70506]Stopped Editing.
+D3_L12=[73327]Project Closed.
+D3_L13=[73335]Project Opened.
+D3_L14=[73371]Started Editing.
+D3_L15=[73717]Project Closed.
+D3_L16=[82327]Project Opened.
+D3_L17=[82409]Project Closed.
+D3_L18=[82442]Project Opened.
+D3_L19=[82729]Project Closed.
+D3_L20=[82772]Project Opened.
+D3_L21=[82780]Started Editing.
+D3_L22=[83081]Stopped Editing.
+D3_L23=[83330]Project Closed.
+D4=08-04-2021
+D4_L=20
+D4_L1=[42270]Project Opened.
+D4_L2=[43757]Project Closed.
+D4_L3=[43815]Project Opened.
+D4_L4=[44001]Project Closed.
+D4_L5=[44027]Project Opened.
+D4_L6=[44060]Started Editing.
+D4_L7=[44378]Stopped Editing.
+D4_E=31
+D4_D=0
+D4_L8=[45568]Project Closed.
+D4_L9=[46816]Project Opened.
+D4_L10=[46840]Project Closed.
+D4_L11=[46840]Project Opened.
+D4_L12=[46850]Project Closed.
+D4_L13=[46868]Project Opened.
+D4_L14=[47014]Started Editing.
+D4_L15=[48644]Stopped Editing.
+D4_L16=[48644]Project Closed.
+D4_L17=[48849]Project Opened.
+D4_L18=[48883]Started Editing.
+D4_L19=[48973]Stopped Editing.
+D4_L20=[48973]Project Closed.
+
+[Opened Files]
+1=Pic Slave I2C.c
+2=
+3=
+[I2CuC887.c]
+Type=4
+Path=
+FileList=
+BuildTool=
+OptionString=
+AdditionalOptionString=
+
+[defines]
+enabled=0
+chip=1
+D1=
+V1=
+
+[fileformats]
+forcecoff=1
+debug=4
+error=2
+object=0
+list=0
+scratch=0
+sta=1
+tre=1
+expandtree=0
+allerrors=1
+allwarnings=1
+stayupne=3
+stayupoe=0
+
+[Windows]
+0=0000 %S 0 0 796 451 3 0
+
+[CompilerVersion]
+Fixed=
+
+[Pic Slave I2C.c]
+Type=4
+Path=
+FileList=
+BuildTool=
+OptionString=
+AdditionalOptionString=
+[Units]
+Count=1
+1=Pic Slave I2C (main)

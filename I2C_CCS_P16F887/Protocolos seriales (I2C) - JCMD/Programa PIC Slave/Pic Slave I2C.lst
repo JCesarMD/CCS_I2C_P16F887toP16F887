@@ -1,0 +1,391 @@
+CCS PCM C Compiler, Version 5.025, 12761               08-abr.-21 13:36
+
+               Filename:   C:\Users\JCesarMD\Documents\Proteus\I2C_CCS_887\Protocolos seriales (I2C) - JCMD\Programa PIC Slave\Pic Slave I2C.lst
+
+               ROM used:   258 words (3%)
+                           Largest free fragment is 2048
+               RAM used:   16 (4%) at main() level
+                           19 (5%) worst case
+               Stack used: 1 locations (0 in main + 1 for interrupts)
+               Stack size: 8
+
+*
+0000:  MOVLW  00
+0001:  MOVWF  0A
+0002:  GOTO   0A1
+0003:  NOP
+0004:  MOVWF  7F
+0005:  SWAPF  03,W
+0006:  CLRF   03
+0007:  MOVWF  21
+0008:  MOVF   0A,W
+0009:  MOVWF  20
+000A:  CLRF   0A
+000B:  MOVF   04,W
+000C:  MOVWF  22
+000D:  MOVF   77,W
+000E:  MOVWF  23
+000F:  MOVF   78,W
+0010:  MOVWF  24
+0011:  MOVF   79,W
+0012:  MOVWF  25
+0013:  MOVF   7A,W
+0014:  MOVWF  26
+0015:  BCF    03.7
+0016:  BCF    03.5
+0017:  MOVLW  8C
+0018:  MOVWF  04
+0019:  BTFSS  00.3
+001A:  GOTO   01D
+001B:  BTFSC  0C.3
+001C:  GOTO   02E
+001D:  MOVF   22,W
+001E:  MOVWF  04
+001F:  MOVF   23,W
+0020:  MOVWF  77
+0021:  MOVF   24,W
+0022:  MOVWF  78
+0023:  MOVF   25,W
+0024:  MOVWF  79
+0025:  MOVF   26,W
+0026:  MOVWF  7A
+0027:  MOVF   20,W
+0028:  MOVWF  0A
+0029:  SWAPF  21,W
+002A:  MOVWF  03
+002B:  SWAPF  7F,F
+002C:  SWAPF  7F,W
+002D:  RETFIE
+002E:  BCF    0A.3
+002F:  BCF    0A.4
+0030:  GOTO   031
+.................... //////////////////////////////////////////////////////////////////////////////// 
+.................... //                    COMUNICACIÓN I2C EN TRE DOS PIC                         // 
+.................... //                                                                            // 
+.................... //                      Aplicación para PIC ESCLAVO                           // 
+.................... //                                                                            // 
+.................... //          El PIC esclavo lee tres botones y estos activan tres led          // 
+.................... //                   respectivamente provenientes del maestro                 // 
+.................... //             y envía el dato de tres botones al PIC maestro via I2C         // 
+.................... //                  que lo mostrará en tres leds respectivamente.             // 
+.................... //                                                                            // 
+.................... //                          Desarrollo de JCesarMD                            // 
+.................... //////////////////////////////////////////////////////////////////////////////// 
+....................  
+.................... #include <16F887.h> 
+.................... //////////// Standard Header file for the PIC16F887 device //////////////// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... ////        (C) Copyright 1996, 2013 Custom Computer Services          //// 
+.................... //// This source code may only be used by licensed users of the CCS C  //// 
+.................... //// compiler.  This source code may only be distributed to other      //// 
+.................... //// licensed users of the CCS C compiler.  No other use, reproduction //// 
+.................... //// or distribution is permitted without written permission.          //// 
+.................... //// Derivative programs created using this software in object code    //// 
+.................... //// form are not restricted in any way.                               //// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... #device PIC16F887 
+....................  
+.................... #list 
+....................  
+....................  
+.................... #device ADC=10     // Preparación de modulo analogico para transmisión de datos 
+.................... #FUSES HS 
+.................... #FUSES NOWDT       // Sin temporizador Watch Dog 
+.................... #FUSES BROWNOUT    // Sin brownout reset 
+.................... #FUSES NOLVP       // Sin programación de bajo voltaje, B3(PIC16) or ... 
+....................                    // ...B5(PIC18) used for I/O 
+.................... #FUSES PUT 
+....................  
+....................  
+.................... #use delay(clock=4000000) 
+*
+008A:  MOVLW  2A
+008B:  MOVWF  04
+008C:  BCF    03.7
+008D:  MOVF   00,W
+008E:  BTFSC  03.2
+008F:  GOTO   09E
+0090:  MOVLW  01
+0091:  MOVWF  78
+0092:  CLRF   77
+0093:  DECFSZ 77,F
+0094:  GOTO   093
+0095:  DECFSZ 78,F
+0096:  GOTO   092
+0097:  MOVLW  4A
+0098:  MOVWF  77
+0099:  DECFSZ 77,F
+009A:  GOTO   099
+009B:  GOTO   09C
+009C:  DECFSZ 00,F
+009D:  GOTO   090
+009E:  BCF    0A.3
+009F:  BCF    0A.4
+00A0:  GOTO   0E7 (RETURN)
+.................... #use standard_io(c) 
+.................... #use i2c(SLAVE, SLOW, SDA=PIN_C4, SCL=PIN_C3, force_hw, address=0x46,) 
+*
+007B:  MOVF   2D,W
+007C:  MOVWF  13
+007D:  BSF    14.4
+007E:  BCF    0C.3
+007F:  BSF    03.5
+0080:  BTFSC  14.0
+0081:  GOTO   080
+0082:  CLRF   78
+0083:  BCF    03.5
+0084:  BTFSC  14.4
+0085:  INCF   78,F
+.................... #use rs232(uart1, baud = 9600)   // Initializa modulo UART proyecto explandible 
+....................  
+.................... #use FIXED_IO( B_outputs=PIN_B5,PIN_B4,PIN_B3 ) // Configuración de botones 
+....................  
+.................... #define Led1   PIN_B3             // Configuración de Leds 
+.................... #define Led2   PIN_B4 
+.................... #define Led3   PIN_B5 
+....................  
+.................... int8 buffer; 
+....................  
+.................... /*********** Interrupciones del modulo SSP de comunicaciones ******************/ 
+....................  
+.................... #INT_SSP                 // Arquitectura de interrupción del modulo SSP 
+.................... void SSP_isr()         
+.................... { 
+.................... int8 incoming; 
+.................... int8 state; 
+....................  
+.................... state = i2c_isr_state();    // Asignación del estado del bus I2C 
+*
+0031:  BSF    03.5
+0032:  BTFSC  14.5
+0033:  GOTO   03C
+0034:  BCF    03.5
+0035:  CLRF   29
+0036:  BSF    03.5
+0037:  BTFSS  14.2
+0038:  GOTO   03C
+0039:  BCF    03.5
+003A:  BSF    29.7
+003B:  BSF    03.5
+003C:  BCF    03.5
+003D:  MOVF   29,W
+003E:  INCF   29,F
+003F:  MOVWF  2C
+....................  
+.................... if(state < 0x80)     // El maestro está enviando datos 
+0040:  MOVF   2C,W
+0041:  SUBLW  7F
+0042:  BTFSS  03.0
+0043:  GOTO   075
+....................   { 
+....................    
+....................    incoming = i2c_read();   // El esclavo lee los datos recibidos 
+0044:  BCF    14.6
+0045:  BTFSS  0C.3
+0046:  GOTO   045
+0047:  MOVF   13,W
+0048:  BSF    14.4
+0049:  MOVWF  2B
+....................  
+.................... // Considerando el dato guardado en la variable incoming se activara el led ... 
+.................... // ...que corresponda 
+....................  
+....................          if (incoming==1){output_high(Led1);}else{output_low(Led1);} 
+004A:  DECFSZ 2B,W
+004B:  GOTO   052
+004C:  MOVLW  C7
+004D:  BSF    03.5
+004E:  MOVWF  06
+004F:  BCF    03.5
+0050:  BSF    06.3
+0051:  GOTO   057
+0052:  MOVLW  C7
+0053:  BSF    03.5
+0054:  MOVWF  06
+0055:  BCF    03.5
+0056:  BCF    06.3
+....................          if (incoming==2){output_high(Led2);}else{output_low(Led2);} 
+0057:  MOVF   2B,W
+0058:  SUBLW  02
+0059:  BTFSS  03.2
+005A:  GOTO   061
+005B:  MOVLW  C7
+005C:  BSF    03.5
+005D:  MOVWF  06
+005E:  BCF    03.5
+005F:  BSF    06.4
+0060:  GOTO   066
+0061:  MOVLW  C7
+0062:  BSF    03.5
+0063:  MOVWF  06
+0064:  BCF    03.5
+0065:  BCF    06.4
+....................          if (incoming==3){output_high(Led3);}else{output_low(Led3);} 
+0066:  MOVF   2B,W
+0067:  SUBLW  03
+0068:  BTFSS  03.2
+0069:  GOTO   070
+006A:  MOVLW  C7
+006B:  BSF    03.5
+006C:  MOVWF  06
+006D:  BCF    03.5
+006E:  BSF    06.5
+006F:  GOTO   075
+0070:  MOVLW  C7
+0071:  BSF    03.5
+0072:  MOVWF  06
+0073:  BCF    03.5
+0074:  BCF    06.5
+....................        
+....................   } 
+....................  
+....................    if((state == 0x80))  // El maestro está solicitando datos del esclavo 
+0075:  MOVF   2C,W
+0076:  SUBLW  80
+0077:  BTFSS  03.2
+0078:  GOTO   086
+....................   { 
+....................      i2c_write(buffer); // El esclavo envia datos al maestro por la condición... 
+0079:  MOVF   28,W
+007A:  MOVWF  2D
+....................                         // ...solicitada del maestro 
+....................   } 
+....................  
+*
+0086:  BCF    0C.3
+0087:  BCF    0A.3
+0088:  BCF    0A.4
+0089:  GOTO   01D
+.................... } 
+.................... /******************************************************************************/ 
+....................  
+.................... /*************************** FUNCIÓN PRINCIPAL ********************************/ 
+....................  
+.................... void main() { 
+*
+00A1:  MOVF   03,W
+00A2:  ANDLW  1F
+00A3:  MOVWF  03
+00A4:  MOVLW  FF
+00A5:  MOVWF  27
+00A6:  BSF    27.3
+00A7:  MOVF   27,W
+00A8:  BSF    03.5
+00A9:  MOVWF  07
+00AA:  BCF    03.5
+00AB:  BSF    27.4
+00AC:  MOVF   27,W
+00AD:  BSF    03.5
+00AE:  MOVWF  07
+00AF:  MOVLW  46
+00B0:  MOVWF  13
+00B1:  MOVLW  09
+00B2:  BCF    03.5
+00B3:  MOVWF  14
+00B4:  MOVLW  FF
+00B5:  BSF    03.5
+00B6:  MOVWF  13
+00B7:  MOVLW  36
+00B8:  BCF    03.5
+00B9:  MOVWF  14
+00BA:  BSF    03.5
+00BB:  BSF    11.0
+00BC:  BSF    03.6
+00BD:  BCF    07.3
+00BE:  MOVLW  19
+00BF:  BCF    03.6
+00C0:  MOVWF  19
+00C1:  MOVLW  A6
+00C2:  MOVWF  18
+00C3:  MOVLW  90
+00C4:  BCF    03.5
+00C5:  MOVWF  18
+00C6:  MOVLW  03
+00C7:  MOVWF  29
+00C8:  BSF    03.5
+00C9:  BSF    03.6
+00CA:  MOVF   09,W
+00CB:  ANDLW  C0
+00CC:  MOVWF  09
+00CD:  BCF    03.6
+00CE:  BCF    1F.4
+00CF:  BCF    1F.5
+00D0:  MOVLW  00
+00D1:  BSF    03.6
+00D2:  MOVWF  08
+00D3:  BCF    03.5
+00D4:  CLRF   07
+00D5:  CLRF   08
+00D6:  CLRF   09
+00D7:  BCF    03.7
+....................  
+....................    enable_interrupts(INT_SSP);   // Activación de los modulos de interrupción 
+00D8:  BSF    03.5
+00D9:  BCF    03.6
+00DA:  BSF    0C.3
+....................    enable_interrupts(GLOBAL); 
+00DB:  MOVLW  C0
+00DC:  BCF    03.5
+00DD:  IORWF  0B,F
+....................  
+....................   setup_oscillator(OSC_4MHZ); 
+00DE:  MOVLW  61
+00DF:  BSF    03.5
+00E0:  MOVWF  0F
+00E1:  CLRF   10
+00E2:  MOVF   0F,W
+....................    
+....................   delay_ms(100);                 // Espera 100ms 
+00E3:  MOVLW  64
+00E4:  BCF    03.5
+00E5:  MOVWF  2A
+00E6:  GOTO   08A
+....................    
+....................   output_low(Led1);              // Limpieza de los tres led de entrada 
+00E7:  MOVLW  C7
+00E8:  BSF    03.5
+00E9:  MOVWF  06
+00EA:  BCF    03.5
+00EB:  BCF    06.3
+....................   output_low(Led2); 
+00EC:  BSF    03.5
+00ED:  MOVWF  06
+00EE:  BCF    03.5
+00EF:  BCF    06.4
+....................   output_low(Led3); 
+00F0:  BSF    03.5
+00F1:  MOVWF  06
+00F2:  BCF    03.5
+00F3:  BCF    06.5
+....................  
+....................   while (TRUE) { 
+....................   
+.................... /** Envio del datos al esclavo mediante la variable buffer a la interrupción **/ 
+....................  
+....................     if(input_state(PIN_B0) == 1){buffer=1;} // Asignación de dato para envió... 
+00F4:  BTFSS  06.0
+00F5:  GOTO   0F8
+00F6:  MOVLW  01
+00F7:  MOVWF  28
+....................     if(input_state(PIN_B1) == 1){buffer=2;} // ...al maestro con un botón 
+00F8:  BTFSS  06.1
+00F9:  GOTO   0FC
+00FA:  MOVLW  02
+00FB:  MOVWF  28
+....................     if(input_state(PIN_B2) == 1){buffer=3;} 
+00FC:  BTFSS  06.2
+00FD:  GOTO   100
+00FE:  MOVLW  03
+00FF:  MOVWF  28
+0100:  GOTO   0F4
+....................        
+.................... /******************************************************************************/       
+....................    } 
+.................... } 
+....................  
+0101:  SLEEP
+.................... /******************************************************************************/ 
+
+Configuration Fuses:
+   Word  1: 2FE2   HS NOWDT PUT MCLR NOPROTECT NOCPD BROWNOUT IESO FCMEN NOLVP NODEBUG
+   Word  2: 3FFF   BORV40 NOWRT

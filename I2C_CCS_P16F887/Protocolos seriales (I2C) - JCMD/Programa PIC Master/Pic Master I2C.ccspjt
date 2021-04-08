@@ -1,0 +1,132 @@
+[Directories]
+Include=C:\Program Files\PICC\Devices\;C:\Program Files\PICC\Drivers\;<default>
+Library=
+LinkerScript=
+output=
+[defines]
+enabled=0
+D1=
+V1=
+chip=1
+[fileformats]
+forcecoff=0
+debug=4
+error=2
+object=0
+list=0
+scratch=0
+sta=1
+tre=1
+allerrors=1
+allwarnings=1
+stayupne=3
+stayupoe=0
+expandtree=0
+[PROJECT]
+Target=Pic Master I2C.hex
+Development_Mode=
+Processor=0x876A
+Processor_Text=PIC16F887
+ToolSuite=CCS
+CCSVersion=5.025
+Compiler=PCM
+[Target Data]
+BuildTool=C-COMPILER
+OptionString=+FM
+AdditionalOptionString=
+BuildRequired=1
+FileList=Pic Master I2C.c
+[Pic Master I2C.c]
+Type=4
+Path=
+FileList=
+BuildTool=
+OptionString=
+AdditionalOptionString=
+[mru-list]
+1=Pic Master I2C.c
+[Windows]
+0=0000 %S 0 0 796 451 3 0
+[Opened Files]
+1=Pic Master I2C.c
+2=
+3=
+
+[ProjectLog]
+Days=4
+D1=26-03-2021
+D1_L=10
+D1_L1=[81982]Project Opened.
+D1_L2=[82036]Project Closed.
+D1_L3=[82037]Project Opened.
+D1_L4=[82116]Started Editing.
+D1_L5=[82195]Stopped Editing.
+TotalEdit=67
+TotalDebug=0
+D1_E=4
+D1_D=0
+D1_L6=[82493]Project Closed.
+D1_L7=[82552]Project Opened.
+D1_L8=[82557]Started Editing.
+D1_L9=[82647]Stopped Editing.
+D1_L10=[82799]Project Closed.
+D2=27-03-2021
+D2_L=18
+D2_L1=[79194]Project Opened.
+D2_L2=[79278]Started Editing.
+D2_L3=[79995]Stopped Editing.
+D2_E=30
+D2_D=0
+D2_L4=[79995]Project Closed.
+D2_L5=[80899]Project Opened.
+D2_L6=[80907]Started Editing.
+D2_L7=[81610]Stopped Editing.
+D2_L8=[81611]Project Closed.
+D2_L9=[81926]Project Opened.
+D2_L10=[81958]Project Closed.
+D2_L11=[82100]Project Opened.
+D2_L12=[82136]Started Editing.
+D2_L13=[82405]Stopped Editing.
+D2_L14=[82405]Project Closed.
+D2_L15=[82991]Project Opened.
+D2_L16=[83023]Started Editing.
+D2_L17=[83382]Stopped Editing.
+D2_L18=[83382]Project Closed.
+D3=28-03-2021
+D3_L=18
+D3_L1=[61073]Project Opened.
+D3_L2=[61117]Started Editing.
+D3_L3=[61544]Stopped Editing.
+D3_E=15
+D3_D=0
+D3_L4=[61544]Project Closed.
+D3_L5=[63561]Project Opened.
+D3_L6=[63681]Started Editing.
+D3_L7=[64082]Stopped Editing.
+D3_L8=[64211]Project Closed.
+D3_L9=[64771]Project Opened.
+D3_L10=[64785]Started Editing.
+D3_L11=[65087]Stopped Editing.
+D3_L12=[65452]Started Editing.
+D3_L13=[65752]Stopped Editing.
+D3_L14=[65790]Started Editing.
+D3_L15=[66077]Stopped Editing.
+D3_L16=[66077]Project Closed.
+D3_L17=[82737]Project Opened.
+D3_L18=[82760]Project Closed.
+D4=08-04-2021
+D4_L=6
+D4_L1=[43758]Project Opened.
+D4_L2=[43814]Project Closed.
+D4_L3=[45602]Project Opened.
+D4_L4=[45633]Started Editing.
+D4_L5=[46698]Stopped Editing.
+D4_E=18
+D4_D=0
+D4_L6=[46698]Project Closed.
+
+[CompilerVersion]
+Fixed=
+[Units]
+Count=1
+1=Pic Master I2C (main)

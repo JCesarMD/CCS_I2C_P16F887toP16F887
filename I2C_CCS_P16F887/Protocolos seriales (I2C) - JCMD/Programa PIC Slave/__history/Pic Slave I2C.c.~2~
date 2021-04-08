@@ -1,0 +1,85 @@
+////////////////////////////////////////////////////////////////////////////////
+//                    COMUNICACIÓN I2C EN TRE DOS PIC                         //
+//                                                                            //
+//                      Aplicación para PIC ESCLAVO                           //
+//                                                                            //
+//       El PIC maestro lee teclado y envía el dato al PIC esclavo via I2C    //
+//                      que lo mostrará en un lcd.                            //
+//                                                                            //
+//                            (c) RobotyPic                                   //
+////////////////////////////////////////////////////////////////////////////////
+
+#include <16F887.h>
+
+#device ADC=10
+//#fuses NOWDT, HS, PUT, NOPROTECT, BROWNOUT, MCLR, NOCPD
+
+#FUSES HS
+#FUSES NOWDT      //No Watch Dog Timer
+#FUSES BROWNOUT //No brownout reset
+#FUSES NOLVP      //No low voltage prgming, B3(PIC16) or B5(PIC18) used for I/O
+#FUSES PUT
+
+
+#use delay(clock=4000000)
+#use standard_io(c)
+#use i2c(SLAVE, SLOW, SDA=PIN_C4, SCL=PIN_C3, force_hw, address=0x46,) //4C
+#use rs232(uart1, baud = 9600)                // Initialize UART module
+
+#use FIXED_IO( B_outputs=PIN_B5,PIN_B4,PIN_B3 )
+
+#define Led1   PIN_B3
+#define Led2   PIN_B4
+#define Led3   PIN_B5
+
+
+
+int8 buffer;
+
+#INT_SSP
+void SSP_isr()
+{
+int8 incoming;
+int8 state;
+
+state = i2c_isr_state();
+putc(state); 
+
+if(state < 0x80)     // Master is sending data 7f
+  {
+   incoming = i2c_read();
+         if (incoming==1){output_high(Led1);}else{output_low(Led1);}
+         if (incoming==2){output_high(Led2);}else{output_low(Led2);}
+         if (incoming==3){output_high(Led3);}else{output_low(Led3);}
+      
+  }
+
+   if((state == 0x80))                   // Master is requesting data from slave
+  {
+      // Lower 3 bits of state = the index
+        i2c_write(buffer);
+  }
+
+}
+
+void main() {
+
+   enable_interrupts(INT_SSP);
+   enable_interrupts(GLOBAL);
+
+  setup_oscillator(OSC_4MHZ);
+  
+  delay_ms(100);                    // Wait 100ms
+  
+  output_low(Led1);
+  output_low(Led2);
+  output_low(Led3);
+  
+  while (TRUE) {
+   
+      if(input_state(PIN_B0) == 1){buffer=1;}
+      if(input_state(PIN_B1) == 1){buffer=2;}
+      if(input_state(PIN_B2) == 1){buffer=3;}
+      
+   }
+}

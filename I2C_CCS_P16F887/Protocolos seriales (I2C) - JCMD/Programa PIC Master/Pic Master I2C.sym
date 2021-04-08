@@ -1,0 +1,66 @@
+004-005 @READ_PROGRAM_MEMORY8.P1
+004-005 @WRITE_PROGRAM_MEMORY8.P2
+015     CCP_1_LOW
+015     CCP_1
+016     CCP_1_HIGH
+01B     CCP_2
+01B     CCP_2_LOW
+01C     CCP_2_HIGH
+020     @TRIS_C
+021     tecla
+022     incoming
+023     @I2C_READU_1.P1
+023     @I2C_WRITEU_1.P2
+023     @delay_ms1.P3
+023     MAIN.@SCRATCH1
+077     @SCRATCH
+078     @SCRATCH
+078     _RETURN_
+079     @SCRATCH
+07A     @SCRATCH
+107.6   C1OUT
+108.6   C2OUT
+10D-10E @WRITE_PROGRAM_MEMORY8.P1
+10D-10E @READ_PROGRAM_MEMORY8.P2
+
+ROM Allocation:
+000004  @I2C_WRITEU_1
+000014  envio_I2C
+000025  @I2C_READU_1
+000037  @delay_ms1
+00004E  MAIN
+00004E  @cinit1
+000072  @cinit2
+
+Project Directory:
+    C:\Users\JCesarMD\Documents\CCS C Projects\I2CuC887\Comunicacion I2C 2 PIC\Programa PIC Master\
+
+Project Files:
+    Pic Master I2C.c                                        [08-abr.-21 12:58  CRC=40816018]
+    ..\..\..\..\..\..\..\Program Files (x86)\PICC\Devices\16F887.h [18-abr.-14 17:56  CRC=42D047B0]
+
+Source signature=C621EF78
+
+Units:
+    Pic Master I2C (main)
+
+Compiler Settings:
+    Processor:      PIC16F887
+    Pointer Size:   16
+    ADC Range:      0-255
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+    Compile Mode:       CCS5
+
+Output Files:
+    XREF file:   Pic Master I2C.xsym
+    Errors:      Pic Master I2C.err
+    Ext Symbols: Pic Master I2C.esym
+    INHX8:       Pic Master I2C.hex
+    Symbols:     Pic Master I2C.sym
+    List:        Pic Master I2C.lst
+    Debug/COFF:  Pic Master I2C.cof
+    Project:     Pic Master I2C.ccspjt
+    Call Tree:   Pic Master I2C.tre
+    Statistics:  Pic Master I2C.STA
